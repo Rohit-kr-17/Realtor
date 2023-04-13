@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 function Header() {
-	const [pageState, setPageState] = useState("sign-in");
+	const [pageState, setPageState] = useState("Sign in");
 	const auth = getAuth();
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) setPageState("Profile");
-			else setPageState("Sign-in");
+			else setPageState("Sign in");
 		});
 	}, [auth]);
 	const location = useLocation();
@@ -16,7 +16,7 @@ function Header() {
 		if (route === location.pathname) return true;
 	};
 	return (
-		<div className="bg-white border-b shadow-sm sticky top-0 z-50">
+		<div className="bg-white border-b shadow-sm sticky top-0 z-40">
 			<header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
 				<div>
 					<img
