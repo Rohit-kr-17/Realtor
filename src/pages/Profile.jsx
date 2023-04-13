@@ -1,7 +1,7 @@
 import { getAuth, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { toast } from "react-toastify";
 function Profile() {
