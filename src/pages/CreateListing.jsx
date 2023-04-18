@@ -154,6 +154,7 @@ function CreateListing() {
 			imgUrls,
 			geolocation,
 			timestamp: serverTimestamp(),
+			userRef: auth.currentUser.uid,
 		};
 		delete formDataCpy.images;
 		!formDataCpy.offer && delete formDataCpy.discountedPrice;
