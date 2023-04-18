@@ -1,7 +1,7 @@
 import { getAuth, updateProfile } from "firebase/auth";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Spinner from "../Components/Spinner";
+
 import {
 	collection,
 	doc,
@@ -134,8 +134,10 @@ function Profile() {
 				{/* {loading && <Spinner />} */}
 				{!loading && listings.length > 0 && (
 					<>
-						<h2 className="text-2xl text-center font-semibold">My Lisitngs</h2>
-						<ul>
+						<h2 className="text-2xl text-center font-semibold mb-6">
+							My Lisitngs
+						</h2>
+						<ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols- mt-6 mb-6">
 							{listings.map((listing) => {
 								console.log(listing.data.name);
 								return (
