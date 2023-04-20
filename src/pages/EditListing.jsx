@@ -50,12 +50,14 @@ function CreateListing() {
 			toast.error("You can't edit this listing");
 			navigate("/");
 		}
-	}, [auth.currentUser.uid, listing, navigate, params.listingId]);
+	}, [auth.currentUser.uid, listing, navigate]);
 	useEffect(() => {
 		setLoading(true);
+
 		const fetchListing = async () => {
 			const docRef = doc(db, "listings", params.listingId);
 			const docSnap = await getDoc(docRef);
+
 			if (docSnap.exists) {
 				setListing(docSnap.data());
 				setFormData({ ...docSnap.data() });
@@ -122,7 +124,7 @@ function CreateListing() {
 				.then((response) => response.json())
 				.then((response) => {
 					console.log(response);
-					if (response.Results.length == 0) {
+					if (response.Results.length === 0) {
 						setLoading(false);
 						toast.error("Invalid Address");
 						return;
@@ -155,6 +157,8 @@ function CreateListing() {
 								break;
 							case "running":
 								console.log("Upload is running");
+								break;
+							default:
 								break;
 						}
 					},
