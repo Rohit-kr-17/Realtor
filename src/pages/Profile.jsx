@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import {
 	collection,
+	deleteDoc,
 	doc,
 	getDocs,
 	orderBy,
@@ -72,6 +73,19 @@ function Profile() {
 		};
 		fetchUserListings();
 	}, [auth.currentUser.uid]);
+	const onDelete = async (listingId) => {
+		if (window.confirm("Are you sure you want to delete?")) {
+			await deleteDoc(doc(db, "listings", listingId));
+			const updatedListing = listings.filter(
+				(lisiting) => lisiting.id !== listingId
+			);
+			setListings(updatedListing);
+			toast.success("Successfully deleted the listing");
+		}
+	};
+	const onEdit = (listingId) => {
+		navigate(`/edit-listing/${listingId}`);
+	};
 	return (
 		<>
 			<section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
@@ -145,6 +159,8 @@ function Profile() {
 										key={listing.id}
 										id={listing.id}
 										listing={listing.data}
+										onDelete={() => onDelete(listing.id)}
+										onEdit={() => onEdit(listing.id)}
 									/>
 								);
 							})}
