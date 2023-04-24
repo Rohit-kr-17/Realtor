@@ -94,17 +94,16 @@ function CreateListing() {
 					if (response.Results.length === 0) {
 						setLoading(false);
 						toast.error("Invalid Address");
+						navigate("/");
 						return;
+					} else {
+						geolocation.lat = response.Results[0]?.latitude ?? 0;
+						geolocation.lng = response.Results[0]?.longitude ?? 0;
 					}
-					geolocation.lat = response.Results[0]?.latitude ?? 0;
-					geolocation.lng = response.Results[0]?.longitude ?? 0;
-					console.log([geolocation.lat, geolocation.lng]);
 				})
 				.catch((err) => {
-					console.log(address);
-					toast.error("invalasdid Address");
+					toast.error("invalid Address");
 					navigate("/");
-					console.log(err);
 				});
 		} else {
 			geolocation.lat = latitude;
