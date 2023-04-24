@@ -12,7 +12,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
 import EditListing from "./pages/EditListing";
 import Listing from "./pages/Listing";
-// import Category from "./pages/Category";
+import Category from "./pages/Category";
 
 export default function App() {
 	return (
@@ -28,7 +28,7 @@ export default function App() {
 					<Route path="/sign-up" element={<SignUp />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
 					<Route path="/offers" element={<Offers />} />
-					{/* <Route path="/category/:categoryName" element={<Category />} /> */}
+					<Route path="/category/:categoryName" element={<Category />} />
 					<Route
 						path="/category/:categoryName/:listingId"
 						element={<Listing />}

@@ -46,6 +46,7 @@ function Listing() {
 	if (loading) {
 		return <Spinner />;
 	}
+	console.log([listing.geolocation.lat, listing.geolocation.lng]);
 	return (
 		<main>
 			<Swiper
@@ -98,7 +99,7 @@ function Listing() {
 							: listing.regularPrice
 									.toString()
 									.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-						{listing.type === "rent" ? "$/Month" : ""}
+						{listing.type === "rent" ? " / Month" : ""}
 					</p>
 					<p className="flex items-center mt-6 mb-3 font-semibold">
 						<FaMapMarkerAlt className="text-green-700 mr-1" />

@@ -30,7 +30,7 @@ function Category() {
 					limit(8)
 				);
 				const querySnap = await getDocs(q);
-				const lastVisible = [querySnap.docs.length - 1];
+				const lastVisible = querySnap.docs[querySnap.docs.length - 1];
 				setlastFetchedListing(lastVisible);
 				const listings = [];
 				querySnap.forEach((doc) => {
@@ -59,7 +59,7 @@ function Category() {
 				limit(4)
 			);
 			const querySnap = await getDocs(q);
-			const lastVisible = [querySnap.docs.length - 1];
+			const lastVisible = querySnap.docs[querySnap.docs.length - 1];
 			setlastFetchedListing(lastVisible);
 			const listings = [];
 			querySnap.forEach((doc) => {

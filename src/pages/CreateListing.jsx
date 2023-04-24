@@ -71,14 +71,16 @@ function CreateListing() {
 			return;
 		}
 		let geolocation = {};
-
+		let location;
 		if (geolocationEnabled) {
 			console.log(REACT_APP_API_URL);
 			const options = {
 				method: "GET",
 				headers: {
-					"X-RapidAPI-Key": process.env.REACT_APP_API_URL,
-					"X-RapidAPI-Host": process.env.REACT_APP_API_URL_HOST,
+					"X-RapidAPI-Key":
+						"6bc2a5cbe5msheb62e6421104da0p1a0b25jsnf90ed5eb1911",
+					"X-RapidAPI-Host":
+						"address-from-to-latitude-longitude.p.rapidapi.com",
 				},
 			};
 
@@ -89,15 +91,21 @@ function CreateListing() {
 				.then((response) => response.json())
 				.then((response) => {
 					console.log(response);
-					if (response.Results.length == 0) {
+					if (response.Results.length === 0) {
 						setLoading(false);
 						toast.error("Invalid Address");
 						return;
 					}
 					geolocation.lat = response.Results[0]?.latitude ?? 0;
 					geolocation.lng = response.Results[0]?.longitude ?? 0;
+					console.log([geolocation.lat, geolocation.lng]);
 				})
-				.catch((err) => console.error(err));
+				.catch((err) => {
+					console.log(address);
+					toast.error("invalasdid Address");
+					navigate("/");
+					console.log(err);
+				});
 		} else {
 			geolocation.lat = latitude;
 			geolocation.lng = longitude;
@@ -335,7 +343,7 @@ function CreateListing() {
 					value={address}
 					onChange={onChange}
 					placeholder="Address"
-					maxLength="32"
+					maxLength="3200"
 					minLength="10"
 					required
 					className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
@@ -377,7 +385,7 @@ function CreateListing() {
 					value={description}
 					onChange={onChange}
 					placeholder="Description"
-					maxLength="320"
+					maxLength="3200"
 					minLength="10"
 					required
 					className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
