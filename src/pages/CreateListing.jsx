@@ -77,10 +77,8 @@ function CreateListing() {
 			const options = {
 				method: "GET",
 				headers: {
-					"X-RapidAPI-Key":
-						"6bc2a5cbe5msheb62e6421104da0p1a0b25jsnf90ed5eb1911",
-					"X-RapidAPI-Host":
-						"address-from-to-latitude-longitude.p.rapidapi.com",
+					"X-RapidAPI-Key": REACT_APP_API_URL,
+					"X-RapidAPI-Host": REACT_APP_API_URL_HOST,
 				},
 			};
 
@@ -130,6 +128,7 @@ function CreateListing() {
 							case "running":
 								console.log("Upload is running");
 								break;
+							default:
 						}
 					},
 					(error) => {
