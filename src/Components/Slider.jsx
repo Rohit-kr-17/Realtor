@@ -28,7 +28,6 @@ function Slider() {
 			});
 			setListings(listings);
 			setLoading(false);
-			console.log(listings);
 		};
 		fetchListing();
 	}, []);
@@ -40,7 +39,7 @@ function Slider() {
 		listings && (
 			<>
 				<Swiper
-					slidePerView={1}
+					slidesPerView={1}
 					navigation
 					pagination={{ type: "progressbar" }}
 					effect="fade"
