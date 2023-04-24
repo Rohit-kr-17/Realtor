@@ -12,22 +12,25 @@ import { db } from "../firebase";
 import { toast } from "react-toastify";
 import Spinner from "../Components/Spinner";
 import ListingItem from "../Components/ListingItem";
-function Offers() {
+import { useParams } from "react-router";
+function Category() {
 	const [listings, setListings] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [lastFetchedListing, setlastFetchedListing] = useState(null);
+	const params = useParams();
+
 	useEffect(() => {
 		const fetchListings = async () => {
 			try {
 				const listingRef = collection(db, "listings");
 				const q = query(
 					listingRef,
-					where("offer", "==", true),
+					where("type", "==", params.categoryName),
 					orderBy("timestamp", "desc"),
 					limit(8)
 				);
 				const querySnap = await getDocs(q);
-				const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+				const lastVisible = [querySnap.docs.length - 1];
 				setlastFetchedListing(lastVisible);
 				const listings = [];
 				querySnap.forEach((doc) => {
@@ -44,19 +47,19 @@ function Offers() {
 			}
 		};
 		fetchListings();
-	}, []);
+	}, [params.categoryName]);
 	const onFetchMoreListings = async () => {
 		try {
 			const listingRef = collection(db, "listings");
 			const q = query(
 				listingRef,
-				where("offer", "==", true),
+				where("type", "==", params.categoryName),
 				orderBy("timestamp", "desc"),
 				startAfter(lastFetchedListing),
 				limit(4)
 			);
 			const querySnap = await getDocs(q);
-			const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+			const lastVisible = [querySnap.docs.length - 1];
 			setlastFetchedListing(lastVisible);
 			const listings = [];
 			querySnap.forEach((doc) => {
@@ -73,7 +76,9 @@ function Offers() {
 	};
 	return (
 		<div className="max-w-6xl mx-auto px-3">
-			<h1 className="text-3xl text-center mt-6 font-bold mb-6">Offers</h1>
+			<h1 className="text-3xl text-center mt-6 font-bold mb-6">
+				Places for {params.categoryName}
+			</h1>
 			{loading ? (
 				<Spinner />
 			) : listings && listings.length > 0 ? (
@@ -107,4 +112,4 @@ function Offers() {
 	);
 }
 
-export default Offers;
+export default Category;

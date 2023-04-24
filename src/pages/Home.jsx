@@ -99,7 +99,6 @@ function Home() {
 					});
 				});
 				setSaleListings(listings);
-				console.log(listings);
 			} catch (error) {
 				console.log(error);
 			}

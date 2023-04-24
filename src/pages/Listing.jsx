@@ -39,7 +39,6 @@ function Listing() {
 				SetLisitng(docSnap.data());
 
 				setLoading(false);
-				console.log(listing);
 			}
 		};
 		fetchListing();
@@ -50,7 +49,7 @@ function Listing() {
 	return (
 		<main>
 			<Swiper
-				slidePerView={1}
+				slidesPerView={1}
 				navigation
 				pagination={{ type: "progressbar" }}
 				effect="fade"
@@ -119,7 +118,7 @@ function Listing() {
 						<span className="font-semibold ">Description- </span>
 						{listing.description}
 					</p>
-					<ul className="flex items-center space-x-2 sm:space-x-10 text-sm font-semibold mb-6 mb-6">
+					<ul className="flex items-center space-x-2 sm:space-x-10 text-sm font-semibold mb-6">
 						<li className="flex items-center whitespace-nowrap">
 							<FaBed className="text-lg mr-1" />
 							{+listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
