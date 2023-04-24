@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
 import {
 	collection,
-	getDoc,
 	getDocs,
 	limit,
 	orderBy,
